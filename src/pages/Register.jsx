@@ -20,7 +20,7 @@ export default function Register() {
 
         try {
             await API.post("/auth/register", form);
-            window.location.href = "/login";
+            window.location.href = "/";
         } catch (err) {
             setError(err.response?.data?.message || "Registration failed");
         }

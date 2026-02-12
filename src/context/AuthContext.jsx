@@ -21,7 +21,7 @@ export default function AuthProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   return (
