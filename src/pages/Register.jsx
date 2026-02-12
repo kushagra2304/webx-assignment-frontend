@@ -120,7 +120,7 @@ export default function Register() {
                 <div className="mt-6 text-center text-sm text-gray-400">
                     Already have an account?{" "}
                     <Link
-                        to="/login"
+                        to="/"
                         className="text-indigo-400 hover:text-indigo-300 font-medium transition"
                     >
                         Login
