@@ -17,11 +17,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          <Route path="/dashboard"
-            element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-
           <Route path="/tasks"
             element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
+
+          <Route path="/dashboard"
+            element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
 
           <Route path="/profile"
             element={<ProtectedRoute><Profile /></ProtectedRoute>} />
