@@ -2,10 +2,12 @@ import { useState } from "react";
 import API from "../api/axios";
 
 export default function TasksList({
-    tasks,
+    tasks = [],
     fetchTasks,
     filter,
-    setFilter
+    setFilter,
+    search,          
+    setSearch       
 }) {
     const [editingId, setEditingId] = useState(null);
     const [editTitle, setEditTitle] = useState("");
@@ -13,12 +15,12 @@ export default function TasksList({
 
     const deleteTask = async (id) => {
         await API.delete(`/tasks/${id}`);
-        fetchTasks();
+        await fetchTasks();
     };
 
     const updateStatus = async (id, status) => {
         await API.put(`/tasks/${id}`, { status });
-        fetchTasks();
+        await fetchTasks();
     };
 
     const startEdit = (task) => {
@@ -39,12 +41,21 @@ export default function TasksList({
             description: editDesc,
             status
         });
+
         setEditingId(null);
-        fetchTasks();
+        await fetchTasks();
     };
 
     return (
-        <div className="bg-neutral-900 p-5 rounded-2xl border border-neutral-800 shadow-lg shadow-black/60">
+        <div className="bg-neutral-900 p-5 rounded-2xl border border-neutral-800 shadow-lg shadow-black/60 space-y-4">
+            <input
+                type="text"
+                placeholder="Search tasks..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} 
+                className="w-full bg-neutral-800 border border-neutral-700 px-3 py-2 rounded-xl text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none"
+            />
+
             <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
                     <h2 className="text-lg font-semibold text-white">Tasks</h2>
@@ -150,12 +161,8 @@ export default function TasksList({
                                                 className="bg-neutral-800 border border-neutral-700 text-gray-200 text-xs px-2 py-1.5 rounded-lg"
                                             >
                                                 <option value="pending">Pending</option>
-                                                <option value="in-progress">
-                                                    In Progress
-                                                </option>
-                                                <option value="completed">
-                                                    Completed
-                                                </option>
+                                                <option value="in-progress">In Progress</option>
+                                                <option value="completed">Completed</option>
                                             </select>
 
                                             <button
